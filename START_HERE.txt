@@ -1,0 +1,38 @@
+TFA7 PROJECT ADAPTED FROM YOUR TSA3 PROJECT
+
+Use this as a SEPARATE project. Do not merge it over your original TSA3 folder.
+
+1. Extract Laravel_POS_TFA7 to a normal folder.
+2. Open that folder in VS Code. The terminal must be beside artisan and composer.json.
+3. Use PHP 8.5 (matching your original project's guidance) and Composer.
+4. Run the following in PowerShell, one command at a time:
+
+   Copy-Item .env.example .env
+   composer install
+   composer require "intervention/image:^3.11"
+   php artisan key:generate
+   php artisan config:clear
+   php artisan migrate
+   php artisan db:seed --class=Tfa7Seeder
+   php artisan storage:link
+   php artisan serve
+
+5. Open http://127.0.0.1:8000/customers or http://127.0.0.1:8000/users.
+6. Create a user, click Edit, and upload a JPG or PNG under 2 MB.
+
+The .env.example uses SQLite. An empty database/database.sqlite is included.
+This keeps the new app separate from your original TSA3 database.
+Do not copy your old .env or old database into this folder for these steps.
+Only copy .env.example once; do not overwrite a configured .env later.
+
+GD must be enabled for image processing. Check php -m for gd and pdo_sqlite.
+If GD is missing, run php --ini, edit that php.ini, enable extension=gd,
+and restart the server. Enable pdo_sqlite/sqlite3 if your PHP setup needs it.
+Your instructor must approve Intervention Image for the image-preparation requirement.
+
+No manual route editing or copying into app is needed. Integration is already done.
+The original Composer lock is retained; the composer require command adds the
+image package and updates both composer.json and composer.lock on your machine.
+Commit those updated files with your final submission.
+
+Read README.md for tests, limitations, hosting, and troubleshooting.
